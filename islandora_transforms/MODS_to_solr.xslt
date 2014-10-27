@@ -33,7 +33,7 @@
         </xsl:for-each>
 
         <!-- Main Title, with non-sorting prefixes -->
-        <xsl:for-each select="(mods:titleInfo/mods:title[normalize-space(text())])[1]">
+        <xsl:for-each select="(mods:titleInfo/mods:title[not(@*)][normalize-space(text())])[1]">
             <field>
                 <xsl:attribute name="name">
                     <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
@@ -69,6 +69,14 @@
                     <xsl:text> : </xsl:text>
                     <xsl:value-of select="../mods:subTitle"/>
                 </xsl:if>
+                <xsl:if test="../mods:partNumber">
+                    <xsl:text>. </xsl:text>
+                    <xsl:value-of select="../mods:partNumber"/>
+                </xsl:if>
+                <xsl:if test="../mods:partName">
+                    <xsl:text>, </xsl:text>
+                    <xsl:value-of select="../mods:partName"/>
+                </xsl:if>
             </field>
 
             <field>
@@ -84,6 +92,14 @@
                     <xsl:text> : </xsl:text>
                     <xsl:value-of select="../mods:subTitle"/>
                 </xsl:if>
+                <xsl:if test="../mods:partNumber">
+                    <xsl:text>. </xsl:text>
+                    <xsl:value-of select="../mods:partNumber"/>
+                </xsl:if>
+                <xsl:if test="../mods:partName">
+                    <xsl:text>, </xsl:text>
+                    <xsl:value-of select="../mods:partName"/>
+                </xsl:if>
             </field>
 
         </xsl:for-each>
@@ -92,7 +108,8 @@
 
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'title_', @type, $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'title_', @type, '_', @lang, $suffix)"
+                    />
                 </xsl:attribute>
                 <xsl:value-of select="mods:title/text()"/>
             </field>
@@ -169,13 +186,13 @@
         <xsl:for-each select="mods:name/mods:description[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'name_description', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
         </xsl:for-each>
 
-        <!-- Matt: index URI's by role -->
+        <!-- Index URI's by role -->
         <xsl:for-each
             select="mods:name[@valueURI] | mods:relatedItem[@type='constituent']/mods:name[@valueURI]">
 
@@ -244,7 +261,7 @@
             </xsl:if>
         </xsl:for-each>
 
-        <!-- Matt: index genre URI -->
+        <!-- Index genre URI -->
 
         <xsl:for-each select="mods:genre[@valueURI]">
             <field>
@@ -265,9 +282,19 @@
         <!-- Place of publication -->
         <xsl:for-each
             select="mods:originInfo/mods:place/mods:placeTerm[@type='text'][normalize-space(text())]">
+            <xsl:if test="../../@eventType">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'place_of_publication_text', $suffix)"/>
+                    <xsl:value-of
+                        select="concat($prefix, 'place_', ../../@eventType, '_text', $suffix)"
+                    />
+                </xsl:attribute>
+                <xsl:value-of select="text()"/>
+            </field>
+            </xsl:if>
+            <field>
+                <xsl:attribute name="name">
+                    <xsl:value-of select="concat($prefix, 'place_text', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -275,9 +302,19 @@
 
         <xsl:for-each
             select="mods:originInfo/mods:place/mods:placeTerm[@type='code'][normalize-space(text())]">
+            <xsl:if test="../../@eventType">
+                <field>
+                    <xsl:attribute name="name">
+                        <xsl:value-of
+                            select="concat($prefix, 'place_', ../../@eventType, '_code', $suffix)"
+                        />
+                    </xsl:attribute>
+                    <xsl:value-of select="text()"/>
+                </field>
+            </xsl:if>
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'place_of_publication_code', $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'place_code', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -285,9 +322,19 @@
 
         <!-- Publisher's Name -->
         <xsl:for-each select="mods:originInfo/mods:publisher[normalize-space(text())]">
+            <xsl:if test="../@eventType">
+                <field>
+                    <xsl:attribute name="name">
+                        <xsl:value-of
+                            select="concat($prefix, 'publisher_', ../@eventType, $suffix)"
+                        />
+                    </xsl:attribute>
+                    <xsl:value-of select="text()"/>
+                </field>
+            </xsl:if>
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'publisher', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -306,8 +353,6 @@
         <!-- Date Issued -->
 
         <xsl:for-each select="mods:originInfo/mods:dateIssued[not(@point)][normalize-space(text())]">
-
-            <!-- Matt: these variables let us use the Joda time library -->
 
             <field>
                 <xsl:attribute name="name">
@@ -331,7 +376,7 @@
 
         </xsl:for-each>
 
-        <!-- Matt: these two if tests handle date ranges -->
+        <!-- These two tests handle date ranges -->
 
         <xsl:if test="mods:originInfo/mods:dateIssued[@point]">
 
@@ -471,7 +516,7 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'dateOther_year', '_', translate(@type, ' ', '_'), '_s')"
+                            select="concat($prefix, 'dateOther_year', '_', translate(@type, ' ABCDEFGHIJKLMNOPQRSTUVWXYZ', '_abcdefghijklmnopqrstuvwxyz'), '_s')"
                         />
                     </xsl:attribute>
                     <xsl:if test="contains(text(),'-')">
@@ -597,7 +642,7 @@
             <field>
                 <xsl:attribute name="name">
                     <xsl:value-of
-                        select="concat($prefix, 'physical_description_', local-name(), $suffix)"/>
+                        select="concat($prefix, 'physicalDescription_', local-name(), $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -621,7 +666,7 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'physical_description_', local-name(), '_', @type, $authority, $suffix)"
+                            select="concat($prefix, 'physicalDescription_', local-name(), '_', @type, $authority, $suffix)"
                         />
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
@@ -632,7 +677,7 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'physical_description_', local-name(), $authority, $suffix)"
+                            select="concat($prefix, 'physicalDescription_', local-name(), $authority, $suffix)"
                         />
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
@@ -652,6 +697,16 @@
                 <xsl:value-of select="text()"/>
             </field>
         </xsl:for-each>
+        
+        <xsl:for-each
+            select="mods:physicalDescription/mods:extent[normalize-space(text())]">
+            <field>
+                <xsl:attribute name="name">
+                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
+                </xsl:attribute>
+                <xsl:value-of select="text()"/>
+            </field>
+        </xsl:for-each>
 
         <!-- Pages -->
 
@@ -659,7 +714,7 @@
             select="mods:physicalDescription/mods:extent[@unit='pages'][normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'page_number_count', $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'pageNumber_count', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
                 <xsl:text> pages</xsl:text>
@@ -710,7 +765,7 @@
             </field>
         </xsl:for-each>
 
-        <!-- Matt: index subject URI -->
+        <!-- Index subject URI -->
 
         <xsl:for-each
             select="mods:subject[@valueURI] | mods:subject/mods:topic[@valueURI] | mods:subject/mods:geographic[@valueURI] | mods:subject/mods:temporal[@valueURI] | mods:subject/mods:name[@valueURI] | mods:subject/mods:titleInfo[@valueURI]">
@@ -731,7 +786,7 @@
         <xsl:for-each select="mods:subject">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'subject_coordinated', $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'subject_precoordinated', $suffix)"/>
                 </xsl:attribute>
 
                 <xsl:if test="count(*)>1">
@@ -832,7 +887,7 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'subject_', ../@authority, '_topic', $suffix)"/>
+                            select="concat($prefix, 'subject_topic_', ../@authority, $suffix)"/>
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
                 </field>
@@ -859,7 +914,7 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'subject_', ../@authority, '_name', $suffix)"/>
+                            select="concat($prefix, 'subject_name_', ../@authority, $suffix)"/>
                     </xsl:attribute>
                     <xsl:value-of select="mods:namePart[not(@*)]"/>
                     <xsl:if test="mods:namePart[@type='termsOfAddress']">
@@ -875,7 +930,7 @@
             <xsl:if test="@authority">
                 <field>
                     <xsl:attribute name="name">
-                        <xsl:value-of select="concat($prefix, 'subject_name_', @authority, $suffix)"
+                        <xsl:value-of select="concat($prefix, 'subject_name_', ../@authority, '_', @authority, $suffix)"
                         />
                     </xsl:attribute>
                     <xsl:value-of select="mods:namePart[not(@*)]"/>
@@ -891,13 +946,11 @@
             </xsl:if>
 
         </xsl:for-each>
-        
+
         <xsl:for-each select="mods:subject/mods:titleInfo/mods:title">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of
-                        select="concat($prefix, 'subject_title', $suffix)"
-                    />
+                    <xsl:value-of select="concat($prefix, 'subject_title', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -905,20 +958,17 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'subject_', ../@authority, '_title', $suffix)"
-                        />
+                            select="concat($prefix, 'subject_title_', ../../@authority, $suffix)"/>
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
                 </field>
             </xsl:if>
         </xsl:for-each>
-        
+
         <xsl:for-each select="mods:subject/mods:geographic[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of
-                        select="concat($prefix, 'subject_geographic', $suffix)"
-                    />
+                    <xsl:value-of select="concat($prefix, 'subject_geographic', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -926,20 +976,18 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'subject_', ../@authority, '_geographic', $suffix)"
+                            select="concat($prefix, 'subject_geographic_', ../@authority, $suffix)"
                         />
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
                 </field>
             </xsl:if>
         </xsl:for-each>
-        
+
         <xsl:for-each select="mods:subject/mods:temporal[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of
-                        select="concat($prefix, 'subject_temporal', $suffix)"
-                    />
+                    <xsl:value-of select="concat($prefix, 'subject_temporal', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -947,7 +995,7 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'subject_', ../@authority, '_temporal', $suffix)"
+                            select="concat($prefix, 'subject_temporal_', ../@authority, $suffix)"
                         />
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
@@ -961,80 +1009,7 @@
             <!--don't bother with empty space-->
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <!-- Coordinates (lat,long) -->
-        <xsl:for-each
-            select="mods:subject/mods:topic[../mods:cartographics/text()][normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'cartographic_topic', $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <!-- Country -->
-        <xsl:for-each select="mods:country[normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <xsl:for-each select="mods:province[normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <xsl:for-each select="mods:county[normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <xsl:for-each select="mods:region[normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <xsl:for-each select="mods:city[normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
-                </xsl:attribute>
-                <xsl:value-of select="text()"/>
-            </field>
-        </xsl:for-each>
-
-        <xsl:for-each select="mods:citySection[normalize-space(text())]">
-            <!--don't bother with empty space-->
-            <field>
-                <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'subject_coordinates', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
@@ -1126,7 +1101,6 @@
             </field>
         </xsl:for-each>
 
-        <!-- Series Title Preferred -->
         <xsl:for-each
             select="mods:relatedItem[@type='series']/mods:titleInfo[not(@type='uniform')]/mods:partNumber[normalize-space(text())]">
             <field>
@@ -1142,11 +1116,19 @@
         <xsl:for-each select="mods:relatedItem[@type='series']">
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, 'series_statement', $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'series_statement_proper', $suffix)"/>
                 </xsl:attribute>
-                <xsl:value-of select="mods:titleInfo/mods:title"/>
+                <xsl:value-of select="mods:titleInfo[not(@type='uniform')]/mods:title"/>
                 <xsl:text> ; </xsl:text>
-                <xsl:value-of select="mods:titleInfo/mods:partNumber"/>
+                <xsl:value-of select="mods:titleInfo[not(@type='uniform')]/mods:partNumber"/>
+            </field>
+            <field>
+                <xsl:attribute name="name">
+                    <xsl:value-of select="concat($prefix, 'series_statement_preferred', $suffix)"/>
+                </xsl:attribute>
+                <xsl:value-of select="mods:titleInfo[@type='uniform']/mods:title"/>
+                <xsl:text> ; </xsl:text>
+                <xsl:value-of select="mods:titleInfo[@type='uniform']/mods:partNumber"/>
             </field>
         </xsl:for-each>
 
@@ -1172,7 +1154,7 @@
             </field>
         </xsl:for-each>
 
-        <!-- Volume (e.g. journal vol) -->
+        <!-- Volume (e.g. journal vol) 
         <xsl:for-each select="mods:part/mods:detail[@type='volume']/*[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
@@ -1182,7 +1164,7 @@
             </field>
         </xsl:for-each>
 
-        <!-- Issue (e.g. journal vol) -->
+        Issue (e.g. journal vol) 
         <xsl:for-each select="mods:part/mods:detail[@type='issue']/*[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
@@ -1190,7 +1172,7 @@
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
-        </xsl:for-each>
+        </xsl:for-each> -->
 
         <!-- DOI, ISSN, ISBN, and any other typed IDs -->
         <xsl:for-each select="mods:identifier[@type][normalize-space(text())]">
@@ -1251,13 +1233,17 @@
         <!-- Access Condition -->
         <xsl:for-each select="mods:accessCondition[normalize-space(text())]">
 
-            <xsl:variable name="type">
-                <xsl:value-of select="concat('_', @type)"/>
-            </xsl:variable>
+           
+            <field>
+                <xsl:attribute name="name">
+                    <xsl:value-of select="concat($prefix, 'accessCondition', $suffix)"/>
+                </xsl:attribute>
+                <xsl:value-of select="text()"/>
+            </field>
 
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of select="concat($prefix, local-name(), $type, $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'accessCondition_', @type, $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="text()"/>
             </field>
