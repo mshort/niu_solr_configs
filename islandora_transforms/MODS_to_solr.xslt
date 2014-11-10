@@ -236,8 +236,14 @@
                         <xsl:text>. </xsl:text>
                         <xsl:value-of select="./text()"/>
                     </xsl:for-each>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
@@ -255,8 +261,14 @@
                         <xsl:text>. </xsl:text>
                         <xsl:value-of select="./text()"/>
                     </xsl:for-each>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
@@ -273,8 +285,14 @@
                         <xsl:text>. </xsl:text>
                         <xsl:value-of select="./text()"/>
                     </xsl:for-each>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
@@ -292,8 +310,14 @@
                         <xsl:text>. </xsl:text>
                         <xsl:value-of select="./text()"/>
                     </xsl:for-each>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
@@ -311,8 +335,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -329,8 +359,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -347,8 +383,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -365,8 +407,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -787,9 +835,15 @@
                 <xsl:for-each select="*[position()=1 and position()=last()]">
                     <xsl:if test="name()='mods:name'">
                         <xsl:value-of select="./mods:namePart[not(@*)]"/>
-                        <xsl:if test="./mods:namePart[@type='termsOfAddress']">
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and not(starts-with(./mods:namePart[@type='termsOfAddress'], '('))">
                             <xsl:text>, </xsl:text>
-                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']"/>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
+                        </xsl:if>
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and starts-with(./mods:namePart[@type='termsOfAddress'], '(')">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
                         </xsl:if>
                         <xsl:if test="./mods:namePart[@type='date']">
                             <xsl:text>, </xsl:text>
@@ -806,9 +860,15 @@
                 <xsl:for-each select="*[position()>=1 and position()!=last()]">
                     <xsl:if test="name()='mods:name'">
                         <xsl:value-of select="./mods:namePart[not(@*)]"/>
-                        <xsl:if test="./mods:namePart[@type='termsOfAddress']">
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and not(starts-with(./mods:namePart[@type='termsOfAddress'], '('))">
                             <xsl:text>, </xsl:text>
-                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']"/>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
+                        </xsl:if>
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and starts-with(./mods:namePart[@type='termsOfAddress'], '(')">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
                         </xsl:if>
                         <xsl:if test="./mods:namePart[@type='date']">
                             <xsl:text>, </xsl:text>
@@ -828,9 +888,15 @@
                 <xsl:for-each select="*[position()!=1 and position()=last()]">
                     <xsl:if test="name()='mods:name'">
                         <xsl:value-of select="./mods:namePart[not(@*)]"/>
-                        <xsl:if test="./mods:namePart[@type='termsOfAddress']">
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and not(starts-with(./mods:namePart[@type='termsOfAddress'], '('))">
                             <xsl:text>, </xsl:text>
-                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']"/>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
+                        </xsl:if>
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and starts-with(./mods:namePart[@type='termsOfAddress'], '(')">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
                         </xsl:if>
                         <xsl:if test="./mods:namePart[@type='date']">
                             <xsl:text>, </xsl:text>
@@ -854,9 +920,15 @@
                 <xsl:for-each select="*[position()=1 and position()=last()]">
                     <xsl:if test="name()='mods:name'">
                         <xsl:value-of select="./mods:namePart[not(@*)]"/>
-                        <xsl:if test="./mods:namePart[@type='termsOfAddress']">
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and not(starts-with(./mods:namePart[@type='termsOfAddress'], '('))">
                             <xsl:text>, </xsl:text>
-                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']"/>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
+                        </xsl:if>
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and starts-with(./mods:namePart[@type='termsOfAddress'], '(')">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
                         </xsl:if>
                         <xsl:if test="./mods:namePart[@type='date']">
                             <xsl:text>, </xsl:text>
@@ -873,9 +945,15 @@
                 <xsl:for-each select="*[position()>=1 and position()!=last()]">
                     <xsl:if test="name()='mods:name'">
                         <xsl:value-of select="./mods:namePart[not(@*)]"/>
-                        <xsl:if test="./mods:namePart[@type='termsOfAddress']">
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and not(starts-with(./mods:namePart[@type='termsOfAddress'], '('))">
                             <xsl:text>, </xsl:text>
-                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']"/>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
+                        </xsl:if>
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and starts-with(./mods:namePart[@type='termsOfAddress'], '(')">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
                         </xsl:if>
                         <xsl:if test="./mods:namePart[@type='date']">
                             <xsl:text>, </xsl:text>
@@ -895,9 +973,15 @@
                 <xsl:for-each select="*[position()!=1 and position()=last()]">
                     <xsl:if test="name()='mods:name'">
                         <xsl:value-of select="./mods:namePart[not(@*)]"/>
-                        <xsl:if test="./mods:namePart[@type='termsOfAddress']">
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and not(starts-with(./mods:namePart[@type='termsOfAddress'], '('))">
                             <xsl:text>, </xsl:text>
-                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']"/>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
+                        </xsl:if>
+                        <xsl:if
+                            test="./mods:namePart[@type='termsOfAddress'] and starts-with(./mods:namePart[@type='termsOfAddress'], '(')">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="./mods:namePart[@type='termsOfAddress']/text()"/>
                         </xsl:if>
                         <xsl:if test="./mods:namePart[@type='date']">
                             <xsl:text>, </xsl:text>
@@ -970,9 +1054,15 @@
                     <xsl:value-of select="concat($prefix, 'subject_name', $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="mods:namePart[not(@*)]"/>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
-                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']"/>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="./mods:namePart[@type='date']">
                     <xsl:text>, </xsl:text>
@@ -986,9 +1076,15 @@
                         select="concat($prefix, 'subject_name', $subject_authority, $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="mods:namePart[not(@*)]"/>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
-                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']"/>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="./mods:namePart[@type='date']">
                     <xsl:text>, </xsl:text>
@@ -1004,9 +1100,15 @@
                         />
                     </xsl:attribute>
                     <xsl:value-of select="mods:namePart[not(@*)]"/>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
-                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']"/>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="./mods:namePart[@type='date']">
                         <xsl:text>, </xsl:text>
@@ -1037,8 +1139,8 @@
             <xsl:if test="../@authority">
                 <field>
                     <xsl:attribute name="name">
-                        <xsl:value-of
-                            select="concat($prefix, 'subject_title', $authority, $suffix)"/>
+                        <xsl:value-of select="concat($prefix, 'subject_title', $authority, $suffix)"
+                        />
                     </xsl:attribute>
                     <xsl:value-of select="text()"/>
                 </field>
@@ -1128,7 +1230,7 @@
             </field>
         </xsl:for-each>
         <xsl:for-each select="mods:relatedItem[@type='constituent']/mods:name">
-            
+
             <xsl:variable name="authority">
                 <xsl:choose>
                     <xsl:when test="@authority">
@@ -1139,9 +1241,9 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            
+
             <xsl:variable name="role" select="mods:role/mods:roleTerm/text()"/>
-            
+
             <field>
                 <xsl:attribute name="name">
                     <xsl:value-of select="concat($prefix, 'name', $suffix)"/>
@@ -1151,8 +1253,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -1169,8 +1277,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -1187,8 +1301,14 @@
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -1198,16 +1318,21 @@
             </field>
             <field>
                 <xsl:attribute name="name">
-                    <xsl:value-of
-                        select="concat($prefix, 'constituentName', $authority, $suffix)"/>
+                    <xsl:value-of select="concat($prefix, 'constituentName', $authority, $suffix)"/>
                 </xsl:attribute>
                 <xsl:value-of select="(mods:namePart[not(@*)])[1]/text()"/>
                 <xsl:for-each select="mods:namePart[not(@*) and position()>=2]">
                     <xsl:text>. </xsl:text>
                     <xsl:value-of select="./text()"/>
                 </xsl:for-each>
-                <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                     <xsl:text>, </xsl:text>
+                    <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                </xsl:if>
+                <xsl:if
+                    test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                    <xsl:text> </xsl:text>
                     <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                 </xsl:if>
                 <xsl:if test="mods:namePart[@type='date']">
@@ -1221,41 +1346,59 @@
                         <xsl:value-of select="concat($prefix, 'name_', $role, $suffix)"/>
                     </xsl:attribute>
                     <xsl:value-of select="mods:namePart[not(@*)]"/>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
                         <xsl:text>, </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='date']/text()"/>
                     </xsl:if>
-                </field>  
+                </field>
                 <field>
                     <xsl:attribute name="name">
-                        <xsl:value-of select="concat($prefix, 'name_', $role, $authority, $suffix)"/>
+                        <xsl:value-of select="concat($prefix, 'name_', $role, $authority, $suffix)"
+                        />
                     </xsl:attribute>
                     <xsl:value-of select="mods:namePart[not(@*)]"/>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
                         <xsl:text>, </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='date']/text()"/>
                     </xsl:if>
-                </field>  
+                </field>
                 <field>
                     <xsl:attribute name="name">
-                        <xsl:value-of select="concat($prefix, 'constituentName_', $role, $suffix)"
-                        />
+                        <xsl:value-of select="concat($prefix, 'constituentName_', $role, $suffix)"/>
                     </xsl:attribute>
                     <xsl:value-of select="(mods:namePart[not(@*)])[1]/text()"/>
                     <xsl:for-each select="mods:namePart[not(@*) and position()>=2]">
                         <xsl:text>. </xsl:text>
                         <xsl:value-of select="./text()"/>
                     </xsl:for-each>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
@@ -1266,15 +1409,22 @@
                 <field>
                     <xsl:attribute name="name">
                         <xsl:value-of
-                            select="concat($prefix, 'constituentName_', $role, $authority, $suffix)"/>
+                            select="concat($prefix, 'constituentName_', $role, $authority, $suffix)"
+                        />
                     </xsl:attribute>
                     <xsl:value-of select="(mods:namePart[not(@*)])[1]/text()"/>
                     <xsl:for-each select="mods:namePart[not(@*) and position()>=2]">
                         <xsl:text>. </xsl:text>
                         <xsl:value-of select="./text()"/>
                     </xsl:for-each>
-                    <xsl:if test="mods:namePart[@type='termsOfAddress']">
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and not(starts-with(mods:namePart[@type='termsOfAddress'], '('))">
                         <xsl:text>, </xsl:text>
+                        <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
+                    </xsl:if>
+                    <xsl:if
+                        test="mods:namePart[@type='termsOfAddress'] and starts-with(mods:namePart[@type='termsOfAddress'], '(')">
+                        <xsl:text> </xsl:text>
                         <xsl:value-of select="mods:namePart[@type='termsOfAddress']/text()"/>
                     </xsl:if>
                     <xsl:if test="mods:namePart[@type='date']">
@@ -1404,7 +1554,8 @@
                 <xsl:value-of select="text()"/>
             </field>
         </xsl:for-each>
-        <xsl:for-each select="mods:location/mods:holdingSimple/mods:copyInformation/mods:subLocation[normalize-space(text())]">
+        <xsl:for-each
+            select="mods:location/mods:holdingSimple/mods:copyInformation/mods:subLocation[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
                     <xsl:value-of select="concat($prefix, 'physicalLocation_NIUdb', $suffix)"/>
@@ -1412,7 +1563,8 @@
                 <xsl:value-of select="text()"/>
             </field>
         </xsl:for-each>
-        <xsl:for-each select="mods:location/mods:holdingSimple/mods:copyInformation/mods:shelfLocator[normalize-space(text())]">
+        <xsl:for-each
+            select="mods:location/mods:holdingSimple/mods:copyInformation/mods:shelfLocator[normalize-space(text())]">
             <field>
                 <xsl:attribute name="name">
                     <xsl:value-of select="concat($prefix, 'shelfLocator', $suffix)"/>
@@ -1420,8 +1572,8 @@
                 <xsl:value-of select="text()"/>
             </field>
         </xsl:for-each>
-        
-        
+
+
         <!-- Location (url) -->
         <xsl:for-each select="mods:location/mods:url[normalize-space(text())]">
             <field>
@@ -1431,7 +1583,7 @@
                 <xsl:value-of select="normalize-space(text())"/>
             </field>
         </xsl:for-each>
-        
+
         <!-- Access Condition -->
         <xsl:for-each select="mods:accessCondition[normalize-space(text())]">
             <field>
