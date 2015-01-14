@@ -606,7 +606,7 @@
             </field>
         </xsl:if>
         <!-- Other Date -->
-        <xsl:for-each select="mods:originInfo/mods:dateOther[@tynpe][normalize-space(text())]">
+        <xsl:for-each select="mods:originInfo/mods:dateOther[@type][normalize-space(text())]">
             <xsl:if test="not(@point)">
                 <field>
                     <xsl:attribute name="name">
